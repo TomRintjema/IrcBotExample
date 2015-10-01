@@ -9,7 +9,7 @@ public class Help extends Command {
     public Help(PircBot bot) {
         super(bot);
 
-        doesMsgStartWithTrigger = false;
+        doesMsgStartWithTrigger = true;
         trigger = ".help";
         name = "Help";
         description = "Lists commands.";
@@ -22,7 +22,8 @@ public class Help extends Command {
 			ListCommands(channel);
 			return;
 		}
-		
+		String commandToHelpWith = message.substring(6);
+		ListSpecificCommand(channel, commandToHelpWith);
 	}
 	
 	void ListCommands(String channel) {
@@ -33,5 +34,19 @@ public class Help extends Command {
 		}
 		
 		sendMessage(channel, commands);
+	}
+	
+	void ListSpecificCommand(String channel, String command) {
+		Command toUse = null;
+		for (Command c : commandListForHelp) {
+			if (c.name.equalsIgnoreCase(command)) {
+				toUse = c;
+			}
+		}
+		
+		if (toUse != null) {
+			String commandDescription = toUse.description;
+			sendMessage(channel, commandDescription);
+		}
 	}
 }
