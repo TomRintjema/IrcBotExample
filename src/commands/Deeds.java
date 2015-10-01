@@ -14,7 +14,7 @@ public class Deeds extends Command {
 
         doesMsgStartWithTrigger = false;
         trigger = ".deeds";
-        name = "commands.Deeds";
+        name = "Deeds";
         description = "Displays deeds";
         try {
             witnessLog = new File("WitnessLog.txt");

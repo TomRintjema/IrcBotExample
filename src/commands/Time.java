@@ -9,7 +9,7 @@ public class Time extends Command {
 
         doesMsgStartWithTrigger = false;
         trigger = ".time";
-        name = "commands.Time";
+        name = "Time";
         description = "Displays time for an example";
     }
 

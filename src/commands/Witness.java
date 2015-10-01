@@ -13,7 +13,7 @@ public class Witness extends Command {
 
         doesMsgStartWithTrigger = true;
         trigger = ".witness ";
-        name = "commands.Witness";
+        name = "Witness";
         description = "Uhh, it does something?";
     }
 
