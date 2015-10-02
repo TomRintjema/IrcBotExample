@@ -7,12 +7,28 @@ import org.jibble.pircbot.PircBot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MyBot extends PircBot {
 
     List<Command> commandList = new ArrayList<Command>();
+	Properties prop = new Properties();
+	String reg = "";
 
     public MyBot() {
+	
+		try {
+			FileInputStream fs = new FileInputStream("Setup.sec");
+			prop.load(fs);
+			fs.close();			
+		} catch (IOException e) {
+			
+		}
 
         // bot name on IRC
         this.setName("MyBot");
@@ -27,7 +43,17 @@ public class MyBot extends PircBot {
 		commandList.add(help);
 		help.commandListForHelp = commandList;
 		
+		
+		
+
+		
+		
+		
     }
+	
+	public void onConnect() {
+		sendMessage("NickServ", "identify " + prop.getProperty("Ident"));
+	}
 
     public void onMessage(String channel, String sender, String login, String hostname, String message) {
         for (Command com : commandList) {

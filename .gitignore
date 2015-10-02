@@ -11,3 +11,6 @@ build/
 
 # .gradle
 .gradle
+
+# the secure file .sec 'cause that's secret info for each user
+.sec
