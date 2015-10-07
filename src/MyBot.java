@@ -1,6 +1,7 @@
 import commands.Command;
 import commands.Deeds;
 import commands.Time;
+import commands.Systems;
 import commands.Witness;
 import commands.Help;
 import org.jibble.pircbot.PircBot;
@@ -37,6 +38,7 @@ public class MyBot extends PircBot {
         commandList.add(new Deeds(this));
         commandList.add(new Witness(this));
         commandList.add(new Time(this));
+		commandList.add(new Systems(this));
 		
 		//bleh I don't like doin' this but
 		Help help = new Help(this);
