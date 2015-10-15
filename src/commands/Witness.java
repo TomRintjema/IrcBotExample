@@ -19,7 +19,7 @@ public class Witness extends Command {
 
     public void execute(String channel, String sender, String login, String hostname, String message) {
         String time = new java.util.Date().toString();
-        String witness = "commands.Witness: " + time + " <" + sender + "> " + message.substring(8) + "\r\n";
+        String witness = time + " <" + sender + "> " + message.substring(8) + "\r\n";
 
         try {
             FileWriter fileWriter = new FileWriter("WitnessLog.txt", true);
@@ -29,5 +29,6 @@ public class Witness extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		sendMessage(channel, "Mediocre!");
     }
 }

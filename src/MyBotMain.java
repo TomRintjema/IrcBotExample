@@ -14,6 +14,6 @@ public class MyBotMain {
         bot.connect("irc.synirc.net");
 
         // Join the #pircbot channel.
-        bot.joinChannel("#saelfdev");
+        bot.joinChannel("#elitedangerous");
     }
 }

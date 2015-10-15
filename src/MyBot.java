@@ -3,6 +3,7 @@ import commands.Deeds;
 import commands.Time;
 import commands.Systems;
 import commands.Witness;
+import commands.Rep;
 import commands.Help;
 import org.jibble.pircbot.PircBot;
 
@@ -32,13 +33,14 @@ public class MyBot extends PircBot {
 		}
 
         // bot name on IRC
-        this.setName("MyBot");
+        this.setName("WitnessBot");
 
         // list commands
         commandList.add(new Deeds(this));
         commandList.add(new Witness(this));
         commandList.add(new Time(this));
 		commandList.add(new Systems(this));
+		commandList.add(new Rep(this));
 		
 		//bleh I don't like doin' this but
 		Help help = new Help(this);
