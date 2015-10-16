@@ -1,4 +1,5 @@
 import commands.*;
+import commands.Rep;
 import org.jibble.pircbot.PircBot;
 
 import java.util.ArrayList;
@@ -27,13 +28,14 @@ public class MyBot extends PircBot {
 		}
 
         // bot name on IRC
-        this.setName("MyBot");
+        this.setName("WitnessBot");
 
         // list commands
         commandList.add(new Deeds(this));
         commandList.add(new Witness(this));
         commandList.add(new Time(this));
 		commandList.add(new Systems(this));
+		commandList.add(new Rep(this));
 		commandList.add(new Ship(this));
 		
 		//bleh I don't like doin' this but
