@@ -17,6 +17,6 @@ public class Systems extends Command {
         sendMessage(sender, "Home: 63 G. Capricorni");
         sendMessage(sender, "Fitting: Xihe");
 		sendMessage(sender, "RES: IX Chakan");
-		sendMessage(sender, "Mineing: Frey");
+		sendMessage(sender, "Miniing: Frey");
     }
 }
