@@ -18,7 +18,6 @@ public class Systems extends Command {
         sendMessage(sender, "Fitting: Xihe, Nisgayo");
 		sendMessage(sender, "RES: IX Chakan");
 		sendMessage(sender, "Compromised Nav Beacon: LFT 269, G 69-11");
-		sendMessage(sender, "Mineing: Frey");
 		sendMessage(sender, "Smuggling: Sothis for Feds, or Fehu for Imperial");
     }
 }

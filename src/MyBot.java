@@ -1,10 +1,5 @@
-import commands.Command;
-import commands.Deeds;
-import commands.Time;
-import commands.Systems;
-import commands.Witness;
+import commands.*;
 import commands.Rep;
-import commands.Help;
 import org.jibble.pircbot.PircBot;
 
 import java.util.ArrayList;
@@ -41,6 +36,7 @@ public class MyBot extends PircBot {
         commandList.add(new Time(this));
 		commandList.add(new Systems(this));
 		commandList.add(new Rep(this));
+		commandList.add(new Ship(this));
 		
 		//bleh I don't like doin' this but
 		Help help = new Help(this);
