@@ -37,7 +37,7 @@ public class Orders extends Command {
 				while(in.hasNextLine()) { text += in.nextLine() + "\n"; }
 				in.close();
 				String[] texts = text.split("\n");
-				sendMessage(channel, texts[texts.length]);
+				sendMessage(channel, texts[texts.length - 1]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
