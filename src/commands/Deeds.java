@@ -16,31 +16,11 @@ public class Deeds extends Command {
         trigger = ".deeds";
         name = "Deeds";
         description = "Displays deeds";
-        try {
-            witnessLog = new File("WitnessLog.txt");
-            if (!witnessLog.exists()) {
-                witnessLog.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void execute(String channel, String sender, String login, String hostname, String message) {
-        StringBuilder text = new StringBuilder();
-        try {
-            Scanner in = new Scanner(witnessLog);
-            while (in.hasNextLine()) {
-                text.append(in.nextLine() + "\n");
-            }
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String[] texts = text.toString().split("\n");
-        for (int i = 0; i < texts.length; i++) {
-            sendMessage(sender, texts[i]);
-        }
+        sendMessage(sender, "Deeds is broken for now. If you really want to know ask TomR.");
     }
+    
 }

@@ -38,6 +38,7 @@ public class MyBot extends PircBot {
 		commandList.add(new Rep(this));
 		commandList.add(new Radio(this));
 		commandList.add(new Orders(this));
+		commandList.add(new NewOrder(this));
 		//commandList.add(new Ship(this));
 		
 		//bleh I don't like doin' this but
