@@ -1,15 +1,11 @@
 import commands.*;
-import commands.Rep;
 import org.jibble.pircbot.PircBot;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class MyBot extends PircBot {
 
@@ -38,7 +34,7 @@ public class MyBot extends PircBot {
 		commandList.add(new Rep(this));
 		commandList.add(new Radio(this));
 		commandList.add(new Orders(this));
-		commandList.add(new NewOrder(this));
+		//commandList.add(new NewOrder(this));
 		//commandList.add(new Ship(this));
 		
 		//bleh I don't like doin' this but
@@ -53,6 +49,27 @@ public class MyBot extends PircBot {
 		
 		
     }
+
+	public void onJoin(String channel, String sender, String login, String hostname) {
+		//Find if user has orders waiting.
+		Orders ordersActive = findOrdersCommand(commandList);
+		List<String> alertThesePeople = ordersActive.peopleWithOrders();
+		for (String a : alertThesePeople) {
+			if (sender.equalsIgnoreCase(a)) {
+				sendMessage(sender, "You have " + ordersActive.numOfOrders(sender) + " messages.");
+			}
+		}
+	}
+
+	Orders findOrdersCommand (List<Command> list) {
+		for (Command c : list) {
+			if (c instanceof Orders) {
+				return (Orders)c;
+			}
+		}
+
+		return new Orders(this);
+	}
 	
 	public void onConnect() {
 		sendMessage("NickServ", "identify " + prop.getProperty("Ident"));

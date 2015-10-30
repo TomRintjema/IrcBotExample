@@ -1,8 +1,11 @@
 package commands;
 
 import org.jibble.pircbot.PircBot;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Forer on 10/20/2015.
@@ -120,5 +123,25 @@ public class Orders extends Command {
             orderList.add(o);
             sendMessage(sender, "Order added for " + name + " from " + sender + " : " + order);
         }
+    }
+
+    public List<String> peopleWithOrders () {
+        Set<String> hs = new HashSet<>();
+        for (Order o : orderList) {
+            hs.add(o.name);
+        }
+        List<String> output = new ArrayList<>();
+        output.addAll(hs);
+        return output;
+    }
+
+    public int numOfOrders(String sender) {
+        int i = 0;
+        for (Order o : orderList) {
+            if (o.name.equalsIgnoreCase(sender)) {
+                i++;
+            }
+        }
+        return i;
     }
 }
