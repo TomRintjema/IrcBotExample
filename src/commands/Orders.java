@@ -25,9 +25,23 @@ public class Orders extends Command {
             DisplayListOfOrders(sender);
         } else if (message.equalsIgnoreCase(".orders clear")) {
             ClearOrders(sender);
+        } else if (IsAdmin(sender) && message.equalsIgnoreCase(".orders clearallfrog")){
+            AdminClearAllFrogOrders(sender);
+        } else if (IsAdmin(sender) && message.equalsIgnoreCase(".orders adminlistorders")) {
+            AdminListAllOrders(sender);
         } else {
             AddOrder(sender, message);
         }
+    }
+
+    public boolean IsAdmin(String sender) {
+        if (sender.equalsIgnoreCase("Forer")) {
+            return true;
+        }
+        if (sender.equalsIgnoreCase("TomR")) {
+            return true;
+        }
+        return false;
     }
 
     public void DisplayListOfOrders(String sender) {
@@ -68,7 +82,27 @@ public class Orders extends Command {
         for (int i = 0; i < orderDelete.size(); i++) {
             orderList.remove(orderDelete.get(i));
         }
+    }
 
+    public void AdminClearAllFrogOrders(String sender) {
+        List<Order> orderDelete = new ArrayList<>();
+        for (Order o : orderList) {
+            if (o.name.equalsIgnoreCase("allfrogs")) {
+                orderDelete.add(o);
+            }
+        }
+
+        sendMessage(sender, orderDelete.size() + " orders were removed.");
+        //if that doesn't work then I can try the whole
+        for (int i = 0; i < orderDelete.size(); i++) {
+            orderList.remove(orderDelete.get(i));
+        }
+    }
+
+    public void AdminListAllOrders(String sender) {
+        for (Order o : orderList) {
+            sendMessage(sender, o.toString());
+        }
     }
 
     public void AddOrder(String sender, String message) {
@@ -80,9 +114,11 @@ public class Orders extends Command {
 
         name = splitNewMessage[0];
         int nameLength = name.length();
-        order = newMessage.substring(nameLength+1); //+1 for the space
-        Order o = new Order(name, sender, order);
-        orderList.add(o);
-        sendMessage(sender, "Order added for " + name + " from " + sender + " : " + order);
+        if (name.length() < newMessage.length()) {
+            order = newMessage.substring(nameLength + 1); //+1 for the space
+            Order o = new Order(name, sender, order);
+            orderList.add(o);
+            sendMessage(sender, "Order added for " + name + " from " + sender + " : " + order);
+        }
     }
 }
