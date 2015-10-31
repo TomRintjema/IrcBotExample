@@ -2,6 +2,7 @@ package commands;
 
 import org.jibble.pircbot.PircBot;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Orders extends Command {
         trigger = ".orders";
         name = "Orders";
         description = "Keeps a log of orders for people.";
+        fillOrdersFromDisk();
     }
 
     public void execute (String channel, String sender, String login, String hostname, String message) {
@@ -85,6 +87,7 @@ public class Orders extends Command {
         for (int i = 0; i < orderDelete.size(); i++) {
             orderList.remove(orderDelete.get(i));
         }
+        writeOrdersToDisk();
     }
 
     public void AdminClearAllFrogOrders(String sender) {
@@ -100,6 +103,8 @@ public class Orders extends Command {
         for (int i = 0; i < orderDelete.size(); i++) {
             orderList.remove(orderDelete.get(i));
         }
+
+        writeOrdersToDisk();
     }
 
     public void AdminListAllOrders(String sender) {
@@ -123,6 +128,7 @@ public class Orders extends Command {
             orderList.add(o);
             sendMessage(sender, "Order added for " + name + " from " + sender + " : " + order);
         }
+        writeOrdersToDisk();
     }
 
     public List<String> peopleWithOrders () {
@@ -143,5 +149,34 @@ public class Orders extends Command {
             }
         }
         return i;
+    }
+
+    public void writeOrdersToDisk() {
+        String fileName = "Orders.txt";
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            for (Order o : orderList) {
+                writer.write(o.toWrite());
+            }
+            writer.close();
+        } catch (IOException exc){
+            System.out.printf("Oh shit son we had an error writing %s\n", fileName);
+        }
+    }
+
+    public void fillOrdersFromDisk() {
+        String fileName = "Orders.txt";
+        orderList.clear();
+        try {
+            FileReader read = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(read);
+            String line = br.readLine();
+            while (line != null) {
+                orderList.add(new Order(line));
+                line = br.readLine();
+            }
+        } catch (IOException exc) {
+            System.out.printf("Oh shit son we had an error reading %s\n", fileName);
+        }
     }
 }

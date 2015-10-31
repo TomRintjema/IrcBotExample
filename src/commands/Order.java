@@ -14,9 +14,29 @@ public class Order {
         this.order = order;
     }
 
+    public Order(String justReadOrder) {
+        //This constructor is mainly for taking orders from file.
+        this.name = justReadOrder.split("\\s+")[0];
+        this.sender = justReadOrder.split("\\s+")[1];
+        this.order = justReadOrder.substring(name.length() + sender.length() + 2);
+    }
+
     public String toString() {
         String output = "";
         output += "To : " + name + " From : " + sender + " : " + order;
         return output;
     }
+
+    public String toWrite() {
+        String output = "";
+        output += name;
+        output += " ";
+        output += sender;
+        output += " ";
+        output += order;
+        output += "\n";
+        return output;
+    }
+
+
 }
