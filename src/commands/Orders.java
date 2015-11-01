@@ -21,7 +21,7 @@ public class Orders extends Command {
         doesMsgStartWithTrigger = true;
         trigger = ".orders";
         name = "Orders";
-        description = "Keeps a log of orders for people.";
+        description = ".orders: Lists your orders. .orders clear: Clears orders to you. .orders <Person> <Message>: Give a person an order. .orders allfrogs: Sends a message to everyone. .orders clearmyallfrogs: Removes messages to allfrogs by you.";
         fillOrdersFromDisk();
     }
 
@@ -30,22 +30,46 @@ public class Orders extends Command {
             DisplayListOfOrders(sender);
         } else if (message.equalsIgnoreCase(".orders clear")) {
             ClearOrders(sender);
-        } else if (IsAdmin(sender) && message.equalsIgnoreCase(".orders clearallfrog")){
+        } else if (IsAdmin(sender) && message.equalsIgnoreCase(".orders clearallfrogs")){
             AdminClearAllFrogOrders(sender);
         } else if (IsAdmin(sender) && message.equalsIgnoreCase(".orders adminlistorders")) {
             AdminListAllOrders(sender);
+        } else if (message.equalsIgnoreCase(".orders clearmyallfrogs")) {
+            ClearMyAllfrogs(sender);
         } else {
             AddOrder(sender, message);
         }
     }
 
+    void ClearMyAllfrogs(String sender) {
+        List<Order> orderDelete = new ArrayList<>();
+        for (Order o : orderList) {
+            if (o.sender.equalsIgnoreCase(sender)) {
+                if (o.name.equalsIgnoreCase("allfrogs")) {
+                    orderDelete.add(o);
+                }
+            }
+        }
+
+        for (int i = 0; i < orderDelete.size(); i++) {
+            orderList.remove(orderList.get(i));
+        }
+
+        writeOrdersToDisk();
+    }
+
     public boolean IsAdmin(String sender) {
-        if (sender.equalsIgnoreCase("Forer")) {
-            return true;
+        List<String> admins = new ArrayList<>();
+        admins.add("Forer");
+        admins.add("TomR");
+        admins.add("Paramemetic");
+
+        for (String s : admins) {
+            if (s.equalsIgnoreCase(sender)) {
+                return true;
+            }
         }
-        if (sender.equalsIgnoreCase("TomR")) {
-            return true;
-        }
+
         return false;
     }
 
