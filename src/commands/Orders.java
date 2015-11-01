@@ -63,6 +63,7 @@ public class Orders extends Command {
         admins.add("Forer");
         admins.add("TomR");
         admins.add("Paramemetic");
+        admins.add("Kowboat");
 
         for (String s : admins) {
             if (s.equalsIgnoreCase(sender)) {
