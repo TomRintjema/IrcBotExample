@@ -56,7 +56,7 @@ public class MyBot extends PircBot {
 		List<String> alertThesePeople = ordersActive.peopleWithOrders();
 		for (String a : alertThesePeople) {
 			if (sender.equalsIgnoreCase(a)) {
-				sendMessage(sender, "You have " + ordersActive.numOfOrders(sender) + " messages.");
+				sendMessage(sender, "You have " + ordersActive.numOfOrders(sender) + " messages. Use .orders in #elite to have them PMed to you");
 			}
 		}
 	}
