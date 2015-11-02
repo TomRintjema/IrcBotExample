@@ -2,9 +2,10 @@ package commands;
 
 import org.jibble.pircbot.PircBot;
 
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 public class Witness extends Command {
 
@@ -29,6 +30,13 @@ public class Witness extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
-		sendMessage(channel, "Mediocre!");
+
+        Random rand = new Random();
+        int val = rand.nextInt(10);
+        if (val == 9) {
+            sendMessage(channel, "Perfect in every way!");
+        } else {
+            sendMessage(channel, "Mediocre!");
+        }
     }
 }
